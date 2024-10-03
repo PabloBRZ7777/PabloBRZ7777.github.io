@@ -27,13 +27,16 @@
         }
 
         #message {
-            width: 80%;
+            width: calc(80% - 20px);
             padding: 10px;
             margin-top: 10px;
             border: none;
             background-color: #00ff00;
             color: black;
             font-weight: bold;
+            position: absolute;
+            right: 20px;
+            bottom: 60px;
         }
 
         button {
@@ -45,6 +48,9 @@
             color: black;
             font-weight: bold;
             cursor: pointer;
+            position: absolute;
+            right: 5%;
+            bottom: 60px;
         }
 
         .matrix {
@@ -85,8 +91,8 @@
 <div class="matrix" id="matrix"></div>
 
 <div id="chatbox"></div>
-<input type="text" id="message" placeholder="Digite sua mensagem...">
-<button onclick="sendMessage()">Enviar</button>
+<input type="text" id="message" placeholder="Digite sua mensagem..." onkeypress="checkEnter(event)">
+<!-- Removi o botão, agora a função é com Enter -->
 
 <script>
     // Função para criar a chuva de números
@@ -140,6 +146,12 @@
         } catch (error) {
             console.error('Erro:', error);
             chatbox.innerHTML += `<div><strong>Bot:</strong> Erro ao conectar com a API.</div>`;
+        }
+    }
+
+    function checkEnter(event) {
+        if (event.key === 'Enter') {
+            sendMessage();
         }
     }
 
